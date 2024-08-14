@@ -3,7 +3,7 @@ package app;
 import domain.Student;
 import service.NumberGenerator;
 import service.StudentServices;
-import validator.PeopleValidator;
+import util.validator.PeopleValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,8 @@ public class MainApplication {
     public static Student[] staticArrayStudents = new Student[50];
     public static List<Student> dynamicArrayStudents = new ArrayList<>();
     public static int studentCount = 0;
-    public static void menu(){
+
+    public static void menu() {
         System.out.println("================================STATIC ARRAY===================================");
         System.out.println("(1)  Add student to the static array.");
         System.out.println("(2)  Find student by ID.");
@@ -32,31 +33,35 @@ public class MainApplication {
         System.out.println("(0). Exit application ! & Save student list to file !.");
         System.out.println("=================================================================================");
     }
-    public static void fakeDataStaticArr(){
-        staticArrayStudents[studentCount] = new Student(NumberGenerator.generateId(), "Hao", PeopleValidator.stringToLocalDate("3002-09-23"), "HN", 76.0, 67.0, "0987654321", "UNE", 2003, 9.0);
+
+    public static void fakeDataStaticArr() {
+        staticArrayStudents[studentCount] = new Student(NumberGenerator.generateId(), "Hao",
+                PeopleValidator.stringToLocalDate("3002-09-23"), "HN", 76.0, 67.0, "0987654321", "UNE", 2003, 9.0);
         studentCount++;
-        staticArrayStudents[studentCount] = new Student(NumberGenerator.generateId(), "Nam", PeopleValidator.stringToLocalDate("3002-09-23"), "HN", 76.0, 67.0, "0987654321", "UET", 2003, 6.0);
+        staticArrayStudents[studentCount] = new Student(NumberGenerator.generateId(), "Nam",
+                PeopleValidator.stringToLocalDate("3002-09-23"), "HN", 76.0, 67.0, "0987654321", "UET", 2003, 6.0);
         studentCount++;
-        staticArrayStudents[studentCount] = new Student(NumberGenerator.generateId(), "Long", PeopleValidator.stringToLocalDate("3002-09-23"), "HN", 76.0, 67.0, "0987654321", "UET", 2003, 3.0);
+        staticArrayStudents[studentCount] = new Student(NumberGenerator.generateId(), "Long",
+                PeopleValidator.stringToLocalDate("3002-09-23"), "HN", 76.0, 67.0, "0987654321", "UET", 2003, 3.0);
         studentCount++;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice = -1;
         fakeDataStaticArr();
-        do{
+        do {
             menu();
-            do{
-                try{
+            do {
+                try {
                     System.out.print("Enter the choice: ");
-                    choice = Integer.parseInt(input.nextLine());
-                } catch (Exception ex){
+                    choice = Integer.parseInt(input.nextLine().trim());
+                } catch (Exception ex) {
                     System.out.println("Choice is not in correct format ! Please Re enter choice !");
                 }
             } while (choice == -1);
 
-            switch (choice){
+            switch (choice) {
                 case 1:
                     studentServices.addToStaticArr(staticArrayStudents);
                     break;
@@ -69,17 +74,17 @@ public class MainApplication {
                 case 4:
                     boolean isValid = false;
                     int idDelete = 0;
-                    do{
-                        try{
+                    do {
+                        try {
                             System.out.print("Enter the id of students delete: ");
                             idDelete = Integer.parseInt(input.nextLine());
                             isValid = true;
-                        } catch (Exception ex){
+                        } catch (Exception ex) {
                             System.out.println("Id is not in correct format ! Please Re enter id !");
                         }
                     } while (!isValid);
                     // Compare the origin array length with the array length after delete.
-                    if(studentCount > studentServices.deleteById(staticArrayStudents, studentCount, idDelete)){
+                    if (studentCount > studentServices.deleteById(staticArrayStudents, studentCount, idDelete)) {
                         studentCount--;
                         System.out.println("Delete success !");
                     }
@@ -88,7 +93,7 @@ public class MainApplication {
                     studentServices.displayStudentOfStaticArr(staticArrayStudents, studentCount);
                     break;
                 case 6:
-                    if(studentServices.dataStaticToDynamic(staticArrayStudents, studentCount, dynamicArrayStudents)){
+                    if (studentServices.dataStaticToDynamic(staticArrayStudents, studentCount, dynamicArrayStudents)) {
                         studentCount = 0;
                         System.out.println("Change data success !");
                     } else {

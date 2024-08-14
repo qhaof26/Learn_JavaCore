@@ -1,6 +1,6 @@
 package domain;
 
-import constant.AcademicAbility;
+import util.constant.AcademicAbility;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,26 +12,27 @@ public class Student extends People implements Serializable {
     private Double averageScore;
     private AcademicAbility academicAbility;
 
-    public void updateAcademicAbility(){
-        if(this.averageScore < 3){
+    public void updateAcademicAbility() {
+        if (this.averageScore < 3) {
             academicAbility = AcademicAbility.LEAST;
-        } else if(this.averageScore >= 3 && this.averageScore < 5){
+        } else if (this.averageScore >= 3 && this.averageScore < 5) {
             academicAbility = AcademicAbility.WEAK;
-        } else if(this.averageScore >= 5 && this.averageScore < 6.5){
+        } else if (this.averageScore >= 5 && this.averageScore < 6.5) {
             academicAbility = AcademicAbility.MEDIUM;
-        } else if(this.averageScore >= 6.5 && this.averageScore < 7.5){
+        } else if (this.averageScore >= 6.5 && this.averageScore < 7.5) {
             academicAbility = AcademicAbility.RATHER;
-        } else if(this.averageScore >= 7.5 && this.averageScore < 9){
+        } else if (this.averageScore >= 7.5 && this.averageScore < 9) {
             academicAbility = AcademicAbility.GOOD;
-        }  else if(this.averageScore >= 9.0 && this.averageScore <= 10){
+        } else if (this.averageScore >= 9.0 && this.averageScore <= 10) {
             academicAbility = AcademicAbility.EXCELLENT;
         }
     }
+
     public Student() {
     }
 
     public Student(Integer id, String fullName, LocalDate dateOfBirth, String address, Double height, Double weight,
-                   String studentCode, String school, Integer yearBegin, Double averageScore) {
+            String studentCode, String school, Integer yearBegin, Double averageScore) {
         super(id, fullName, dateOfBirth, address, height, weight);
         this.studentCode = studentCode;
         this.school = school;
