@@ -14,3 +14,4 @@
 - Trường đang theo học - chuỗi < 200 kí tự, không null.
 - Năm bắt đầu học đại học: số 4 chữ số từ 1900, không null.
 - Điểm trung bình tích luỹ - từ 0.0 đến 10.0".
+-----------------------------------------------------------
